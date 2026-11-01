@@ -1,0 +1,211 @@
+/* ============================================================
+   HabitFlow — base styles & design tokens (Material-inspired)
+   ============================================================ */
+
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html, body { height: 100%; }
+
+:root, html[data-theme="dark"] {
+  --bg: #000000;
+  --bg-elev: #0C0D0F;
+  --card: #15171A;
+  --card-2: #1E2126;
+  --pill: #1D1F23;
+  --text: #F2F3F5;
+  --text-2: #9BA1A8;
+  --text-3: #60666E;
+  --line: #23262B;
+  --accent: #2E7F84;
+  --accent-strong: #3A99A0;
+  --on-accent: #FFFFFF;
+  --skip: #C87F3D;
+  --ok: #3AA76D;
+  --danger: #D95F5F;
+  --nav-ind: rgba(58, 153, 160, 0.22);
+  --scrim: rgba(0, 0, 0, 0.6);
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  --snack-bg: #E3E5E8;
+  --snack-fg: #101214;
+}
+
+html[data-theme="light"] {
+  --bg: #F3F4F6;
+  --bg-elev: #FFFFFF;
+  --card: #FFFFFF;
+  --card-2: #ECEEF1;
+  --pill: #E4E7EA;
+  --text: #15181C;
+  --text-2: #5A6169;
+  --text-3: #9AA1A9;
+  --line: #E2E5E9;
+  --accent: #2E7F84;
+  --accent-strong: #2A7378;
+  --on-accent: #FFFFFF;
+  --skip: #C87F3D;
+  --ok: #2E9160;
+  --danger: #D14B4B;
+  --nav-ind: rgba(46, 127, 132, 0.16);
+  --scrim: rgba(20, 22, 26, 0.45);
+  --shadow: 0 10px 30px rgba(20, 24, 30, 0.14);
+  --snack-bg: #1D2024;
+  --snack-fg: #F4F5F7;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    "Noto Sans", "Noto Naskh Arabic UI", "Vazirmatn", Tahoma, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.45;
+  height: 100dvh;
+  overflow: hidden;
+  overscroll-behavior: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+input, textarea, select { font: inherit; color: inherit; }
+a { color: inherit; }
+
+:focus-visible { outline: 2px solid var(--accent-strong); outline-offset: 2px; border-radius: 8px; }
+
+/* ---------- App shell ---------- */
+#app {
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+}
+
+.screen-scroll {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  padding: 0 20px 24px;
+  scrollbar-width: none;
+}
+.screen-scroll::-webkit-scrollbar { display: none; }
+
+/* ---------- Header ---------- */
+.app-header {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: calc(10px + env(safe-area-inset-top, 0px)) 14px 0;
+}
+.app-header .spacer { flex: 1; }
+
+.icon-btn {
+  width: 44px; height: 44px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  color: var(--text);
+  transition: background .15s ease, transform .1s ease;
+}
+.icon-btn:active { background: var(--card-2); transform: scale(.92); }
+.icon-btn svg { width: 22px; height: 22px; }
+
+.page-title {
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  padding: 14px 20px 4px;
+}
+
+/* ---------- Tabs (Today / Weekly / Overall) ---------- */
+.tabs {
+  display: flex;
+  gap: 8px;
+  padding: 10px 20px 2px;
+}
+.tab {
+  min-width: 64px;
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 22px;
+  color: var(--text-2);
+  font-size: 14.5px;
+  font-weight: 500;
+  transition: background .18s ease, color .18s ease;
+}
+.tab[aria-selected="true"] { background: var(--pill); color: var(--text); font-weight: 600; }
+.tab:active { transform: scale(.97); }
+
+/* ---------- Day progress ---------- */
+.day-progress { padding: 14px 20px 0; }
+.progress-track {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--card-2);
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--accent-strong);
+  transition: width .45s cubic-bezier(.22,1,.36,1);
+  min-width: 0;
+}
+.day-progress .p-label {
+  margin-top: 9px;
+  font-size: 13.5px;
+  color: var(--text-2);
+}
+.p-label .num { color: var(--skip); font-weight: 600; }
+.p-label .num.ok { color: var(--ok); }
+
+/* ---------- Bottom navigation ---------- */
+.bottom-nav {
+  flex-shrink: 0;
+  display: flex;
+  background: var(--bg);
+  border-top: 1px solid var(--line);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.nav-btn {
+  flex: 1;
+  height: 62px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 3px;
+  color: var(--text-3);
+  transition: color .18s ease;
+}
+.nav-btn .nav-ico {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 46px; height: 30px;
+  border-radius: 999px;
+  transition: background .18s ease;
+}
+.nav-btn svg { width: 21px; height: 21px; }
+.nav-btn span { font-size: 10.5px; font-weight: 500; letter-spacing: .2px; }
+.nav-btn[aria-current="page"] { color: var(--text); }
+.nav-btn[aria-current="page"] .nav-ico { background: var(--nav-ind); }
+
+/* ---------- Empty state ---------- */
+.empty-state {
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center;
+  padding: 48px 24px 24px;
+  gap: 6px;
+}
+.empty-state .art {
+  width: 128px; height: 128px; margin-bottom: 14px;
+  color: var(--text-3);
+  opacity: .9;
+}
+.empty-state h3 { font-size: 19px; font-weight: 650; }
+.empty-state p { color: var(--text-2); font-size: 14px; max-width: 260px; }
+.empty-state .actions { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; justify-content: center; }
+
+/* ---------- RTL flips ---------- */
+html[dir="rtl"] .flip-rtl svg { transform: scaleX(-1); }

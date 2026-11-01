@@ -1,0 +1,17 @@
+# ---- Build outputs ----
+android/out/
+android/assets/
+release/HabitFlow.apk
+*.idsig
+
+# ---- Signing keys (NEVER commit release keystores) ----
+*.keystore
+*.jks
+keystore.properties
+
+# ---- OS / editor noise ----
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
